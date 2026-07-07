@@ -1,1 +1,44 @@
+name: Grade Copilot Submission
 
+on:
+  issue_comment:
+    # Triggers whenever a comment is posted OR edited (in case someone fixes a formatting typo)
+    types: [created, edited]
+
+jobs:
+  grade-and-update:
+    # Only run if the comment is on a daily challenge issue AND the comment is not from a bot
+    if: |
+      !github.event.sender.bot && 
+      (contains(github.event.issue.labels.*.name, 'daily-challenge') || contains(github.event.issue.title, 'Day '))
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Needed to commit the updated LEADERBOARD.md
+      issues: read
+    steps:
+      # Upgraded to v5 to prevent Node 20 deprecation warnings
+      - name: Checkout Repository
+        uses: actions/checkout@v5
+
+      - name: Process Audit Receipt & Update Database
+        env:
+          COMMENT_BODY: ${{ github.event.comment.body }}
+          COMMENT_AUTHOR: ${{ github.event.comment.user.login }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+        run: |
+          python3 scripts/update_leaderboard.py
+
+      - name: Commit and Push Updated Leaderboard
+        run: |
+          git config --global user.name "AI Competition Bot"
+          git config --global user.email "bot@upskilling-marathon.local"
+          git add data/scores.json LEADERBOARD.md
+          
+          # Check if the Python script actually changed any data before trying to commit
+          if ! git diff-index --quiet HEAD --; then
+            git commit -m "🏆 Score logged for @${{ github.event.comment.user.login }} on '${{ github.event.issue.title }}'"
+            git push
+            echo "✅ Changes pushed to main branch successfully."
+          else
+            echo "ℹ️ No score changes detected (comment was not a valid receipt or score unchanged)."
+          fi

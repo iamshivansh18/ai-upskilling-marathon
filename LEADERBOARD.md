@@ -4,4 +4,4 @@ Welcome to the live scoreboard! Submit your Copilot Audit Receipts in the daily 
 
 | Rank | Developer | Total Score | Completed | Avg Score | Latest Status |
 |---|---|---|---|---|---|
-| 🥇 **#1** | `@user_iamshivansh18` | **9.0 pts** | 1 | 9.0 | ✅ Verified Iterative Session |
+| 🥇 **#1** | `@user_iamshivansh18` | **18.0 pts** | 2 | 9.0 | ✅ Verified Iterative Session |

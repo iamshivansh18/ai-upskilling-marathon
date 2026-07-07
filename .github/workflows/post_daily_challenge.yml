@@ -1,1 +1,51 @@
+name: Post Daily Challenge
 
+on:
+  schedule:
+    # 20:55 UTC (Sunday-Thursday) = 02:25 AM IST (Monday-Friday)
+    - cron: '55 20 * * 0-4'
+  workflow_dispatch: # Allows you to manually click "Run workflow" in GitHub to test it immediately
+
+jobs:
+  post-issue:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      contents: read
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Calculate Day & Post Challenge Issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Checking existing challenges..."
+          
+          # 1. Count how many issues already have the 'daily-challenge' label
+          # Using 2>/dev/null to handle case where label doesn't exist yet on Day 1
+          EXISTING_COUNT=$(gh issue list --label "daily-challenge" --state all --json number -q 'length' 2>/dev/null || echo "0")
+          
+          # If command returns empty, default to 0
+          if [ -z "$EXISTING_COUNT" ]; then EXISTING_COUNT=0; fi
+          
+          DAY_NUM=$((EXISTING_COUNT + 1))
+          echo "Targeting deployment for Day $DAY_NUM..."
+          
+          # 2. Extract title and body from data/challenges.json for this specific day
+          TITLE=$(jq -r ".[] | select(.day == $DAY_NUM) | .title" data/challenges.json)
+          BODY=$(jq -r ".[] | select(.day == $DAY_NUM) | .body" data/challenges.json)
+          
+          # 3. Validate data exists before creating the issue
+          if [ -n "$TITLE" ] && [ "$TITLE" != "null" ]; then
+            gh issue create \
+              --title "🚀 Day $DAY_NUM: $TITLE" \
+              --body "$BODY" \
+              --label "daily-challenge" \
+              --assignee "@me"
+            
+            echo "✅ Successfully posted Day $DAY_NUM: $TITLE"
+          else
+            echo "⚠️ No challenge found for Day $DAY_NUM in data/challenges.json. Marathon completed or check JSON formatting!"
+            exit 0
+          fi

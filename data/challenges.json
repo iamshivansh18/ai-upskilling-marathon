@@ -1,1 +1,102 @@
-[]
+[
+  {
+    "day": 1,
+    "title": "Zero-Shot vs. Few-Shot Prompting in Copilot",
+    "body": "### 🚀 Day 1 Challenge: Zero-Shot vs. Few-Shot\n**Time Budget:** ~25 Minutes\n\n**1. The 5-Minute Primer**\n* **Zero-Shot Prompting** is asking Copilot to do something without giving it any examples. It relies entirely on general training weights and often generates generic, unstyled code.\n* **Few-Shot Prompting** provides 1 or 2 concrete examples of desired input/output inside your prompt. This forces Copilot to mirror your repo's exact naming conventions and architectural patterns.\n\n**2. The 15-Minute Challenge**\n* Open a file in your IDE and open GitHub Copilot Chat.\n* **Attempt 1 (Zero-Shot):** Ask Copilot: `Write a TypeScript/Python utility function to format dates.` Notice how generic the implementation is.\n* **Attempt 2 (Few-Shot):** Now, refine your prompt by providing a pattern: `Write a date formatting utility function. Follow this pattern: Input: '2026-07-08', Output: '08/Jul/2026' (DD/MMM/YYYY). Ensure it handles null inputs by returning 'N/A'.`\n\n**3. How to Submit**\nRun your **Universal Evaluation Prompt** inside Copilot Chat, copy the generated `🛡️ COPILOT AUDIT RECEIPT`, and paste it as a comment below!"
+  },
+  {
+    "day": 2,
+    "title": "Chain-of-Thought (CoT) Architectural Planning",
+    "body": "### 🚀 Day 2 Challenge: Chain-of-Thought (CoT) Planning\n**Time Budget:** ~25 Minutes\n\n**1. The 5-Minute Primer**\n* When asked to write complex logic in one go, LLMs often hallucinate or miss edge cases because they generate tokens sequentially without 'planning' ahead.\n* **Chain-of-Thought (CoT)** forces the AI to break down the problem into sequential steps *before* generating a single line of code, drastically reducing logic bugs.\n\n**2. The 15-Minute Challenge**\n* Open Copilot Chat in your IDE.\n* Find a complex function idea (e.g., a rate-limiter, a caching wrapper, or a retry mechanism with exponential backoff).\n* Prompt Copilot using CoT instruction: `I want to implement an exponential backoff retry wrapper. BEFORE writing the code, list out the 4 logical steps required to handle edge cases like infinite loops and memory leaks. Once we agree on the steps, write the implementation.`\n\n**3. How to Submit**\nRun your **Universal Evaluation Prompt** in Copilot Chat, copy the generated `🛡️ COPILOT AUDIT RECEIPT`, and paste it as a comment below!"
+  },
+  {
+    "day": 3,
+    "title": "The Hallucination Trap (Debugging AI Syntax)",
+    "body": "### 🚀 Day 3 Challenge: The Hallucination Trap\n**Time Budget:** ~25 Minutes\n\n**1. The 5-Minute Primer**\n* Copilot is a probabilistic engine, not a deterministic compiler. If a library has updated recently or a syntax pattern is rare, Copilot will confidently invent methods or parameters that do not exist.\n* Today is about practicing **AI skepticism**—learning how to spot and debug AI hallucinations.\n\n**2. The 15-Minute Challenge**\n* In Copilot Chat, ask it to write code using a very specific, advanced library constraint (e.g., `Write a regex parser using Python's 're' module that also validates RFC 5322 email formatting in one line`, or ask for an obscure AWS SDK SDK/API call).\n* Take the output and test it in your terminal or IDE syntax checker. Look for deprecated methods or invented flags.\n* Tell Copilot what failed and force it to correct its own hallucination by feeding the error stack trace back into the chat.\n\n**3. How to Submit**\nRun your **Universal Evaluation Prompt** in Copilot Chat, copy the generated `🛡️ COPILOT AUDIT RECEIPT`, and paste it as a comment below!"
+  },
+  {
+    "day": 4,
+    "title": "The Persona-Task-Context Framework",
+    "body": "### 🚀 Day 4 Challenge: Structural Prompting\n**Time Budget:** ~25 Minutes\n\n**1. The 5-Minute Primer**\n* The difference between amateur and professional prompt engineering is structure. Using the **PTC Framework (Persona + Task + Context)** eliminates ambiguity.\n* **Persona:** Who should Copilot act as? (e.g., Principal Security Engineer).\n* **Task:** What is the exact output required? (e.g., audit for SQL injection).\n* **Context:** What constraints must it respect? (e.g., PostgreSQL, Node.js express wrapper).\n\n**2. The 15-Minute Challenge**\n* Go to an actual file in our team's repository that handles data input or API queries.\n* Craft a structured PTC prompt in Copilot Chat: `[Persona]: Act as a Senior Performance Engineer. [Task]: Analyze the highlighted function and rewrite it to reduce Big-O time complexity. [Context]: We are running in a memory-constrained serverless environment where readability is secondary to execution speed.`\n* Compare the output against a generic 'make this faster' prompt.\n\n**3. How to Submit**\nRun your **Universal Evaluation Prompt** in Copilot Chat, copy the generated `🛡️ COPILOT AUDIT RECEIPT`, and paste it as a comment below!"
+  },
+  {
+    "day": 5,
+    "title": "Week 1 Show & Tell + Peer Voting",
+    "body": "### 🎉 Day 5: Week 1 Showcase & MVP Voting\n**Time Budget:** ~15 Minutes (No Coding Today!)\n\n**1. The Friday Rhythm**\n* Fridays are for resting your coding muscles, catching up on sprint work, and celebrating the cleanest engineering prompts of the week.\n\n**2. The Showcase Challenge**\n* Look back at your Copilot chats from Monday through Thursday.\n* Pick the **single best prompt or coolest code refactor** you generated this week.\n* Paste your snippet or screenshot as a comment below this issue with a 1-sentence description of why it impressed you.\n\n**3. Vote for the Weekly MVP**\n* Review your teammates' comments below.\n* Vote using emoji reactions:\n  * 🔥 = **Cleanest Code Refactor**\n  * 💡 = **Best Prompt Engineering**\n  * 🚀 = **Most Useful Daily Application**\n* The winner gets the Week 1 MVP Badge!"
+  },
+  {
+    "day": 6,
+    "title": "Copilot Context Shorthands (@workspace & #file)",
+    "body": "### 🚀 Day 6 Challenge: Context Shorthands\n**Time Budget:** ~25 Minutes\n\n**1. The 5-Minute Primer**\n* By default, Copilot Chat only looks at the currently open file. If your code depends on external types, database schemas, or utility helpers, Copilot will guess blind.\n* Use **`@workspace`** to instruct Copilot to index and search your entire repository.\n* Use **`#file:filename.ts`** to explicitly pin a specific dependency into Copilot's working memory.\n\n**2. The 15-Minute Challenge**\n* Open a file in our repository that imports functions or interfaces from another file.\n* In Copilot Chat, use explicit file pinning: `@workspace #file:[insert_dependency_name] Write a new helper method in my current file that uses the shared data types from the referenced file without breaking type safety.`\n* Verify that Copilot used the exact exported types without inventing new ones.\n\n**3. How to Submit**\nRun your **Universal Evaluation Prompt** in Copilot Chat, copy the generated `🛡️ COPILOT AUDIT RECEIPT`, and paste it as a comment below!"
+  },
+  {
+    "day": 7,
+    "title": "Mastering Slash Commands (/explain, /fix, /tests)",
+    "body": "### 🚀 Day 7 Challenge: Slash Commands\n**Time Budget:** ~25 Minutes\n\n**1. The 5-Minute Primer**\n* GitHub Copilot includes built-in shortcuts called **Slash Commands** that execute optimized, pre-built system prompts for common engineering workflows.\n* `/explain` breaks down complex logic into natural language.\n* `/fix` analyzes syntax or runtime errors and suggests direct diff replacements.\n* `/tests` generates boilerplate unit tests for highlighted code.\n\n**2. The 15-Minute Challenge**\n* Find the most complex, legacy, or undocumented function in your current codebase (or grab an algorithm like QuickSort online).\n* Highlight the code, open Chat, and run: `/explain Explain this logic to a junior engineer, highlighting any potential bottlenecks.`\n* Next, deliberately introduce a syntax error or logic bug into a file, highlight it, and run: `/fix What is causing this code to fail compilation?`\n\n**3. How to Submit**\nRun your **Universal Evaluation Prompt** in Copilot Chat, copy the generated `🛡️ COPILOT AUDIT RECEIPT`, and paste it as a comment below!"
+  },
+  {
+    "day": 8,
+    "title": "The Context Noise Bug (When @workspace Fails)",
+    "body": "### 🚀 Day 8 Challenge: Over-Scoping vs. Under-Scoping\n**Time Budget:** ~25 Minutes\n\n**1. The 5-Minute Primer**\n* More context is not always better. When you use `@workspace` on a massive repository, Copilot can suffer from **'lost-in-the-middle' syndrome**, pulling irrelevant files or conflicting legacy patterns into your chat.\n* Precision engineering requires knowing when to scope DOWN using `#selection` or `#file` instead of global workspace searches.\n\n**2. The 15-Minute Challenge**\n* Open a multi-file project.\n* Ask a broad question using `@workspace`: `@workspace How does authentication work in this app?` Notice how long it takes to index and check if the answer includes irrelevant modules.\n* Now, scope down strictly: `#file:auth.service.ts #file:user.model.ts Refactor the login validation loop to handle empty token payloads.` Notice the speed and precision increase.\n\n**3. How to Submit**\nRun your **Universal Evaluation Prompt** in Copilot Chat, copy the generated `🛡️ COPILOT AUDIT RECEIPT`, and paste it as a comment below!"
+  },
+  {
+    "day": 9,
+    "title": "Scoped Multi-File Refactoring",
+    "body": "### 🚀 Day 9 Challenge: Real Codebase Application\n**Time Budget:** ~25 Minutes\n\n**1. The 5-Minute Primer**\n* The ultimate test of IDE mastery is executing a clean refactor across multiple interconnected files without breaking existing repository architecture.\n\n**2. The 15-Minute Challenge**\n* Identify a real task in your current sprint or an ongoing repo chore (e.g., renaming a property across interfaces, replacing a deprecated library call, or updating an error-handling wrapper).\n* Use Copilot Chat with explicit multi-file references: `#file:file1.ts #file:file2.ts We are updating our error response schema. Refactor the error throws in file1 to match the new interface defined in file2.`\n* Review the diff suggestions and apply the cleanest fix.\n\n**3. How to Submit**\nRun your **Universal Evaluation Prompt** in Copilot Chat, copy the generated `🛡️ COPILOT AUDIT RECEIPT`, and paste it as a comment below!"
+  },
+  {
+    "day": 10,
+    "title": "Week 2 Show & Tell + Peer Voting",
+    "body": "### 🎉 Day 10: Week 2 Showcase & MVP Voting\n**Time Budget:** ~15 Minutes (No Coding Today!)\n\n**1. The Friday Rhythm**\n* Catch up on sprint tasks and celebrate the week's best context-scoping victories.\n\n**2. The Showcase Challenge**\n* Look back at your Copilot chats from this week.\n* Paste your cleanest **multi-file refactor** or most effective use of `#file` / `@workspace` as a comment below.\n\n**3. Vote for the Weekly MVP**\n* Vote on your peers' submissions using emoji reactions:\n  * 🔥 = **Best Multi-File Refactor**\n  * 💡 = **Smartest Context Scoping**\n  * 🚀 = **Most Time Saved**\n* The winner gets the Week 2 MVP Badge!"
+  },
+  {
+    "day": 11,
+    "title": "Automated Unit Test Generation (Zero to Coverage)",
+    "body": "### 🚀 Day 11 Challenge: Unit Test Boilerplate\n**Time Budget:** ~25 Minutes\n\n**1. The 5-Minute Primer**\n* Writing repetitive test boilerplate is one of the highest-ROI tasks to offload to Copilot. By feeding Copilot your testing framework rules, you can generate 80% of test coverage in seconds.\n\n**2. The 15-Minute Challenge**\n* Open an untested or poorly tested function in your codebase.\n* Highlight the function, open Copilot Chat, and use explicit testing constraints: `/tests #file:[current_file] Write comprehensive unit tests using our repo's test runner (e.g., Jest/PyTest/JUnit). Include at least 1 positive assertion, 1 negative assertion, and 1 null/undefined boundary test.`\n* Run the generated tests in your terminal and verify they pass.\n\n**3. How to Submit**\nRun your **Universal Evaluation Prompt** in Copilot Chat, copy the generated `🛡️ COPILOT AUDIT RECEIPT`, and paste it as a comment below!"
+  },
+  {
+    "day": 12,
+    "title": "Mocking Injection & Complex Edge-Cases",
+    "body": "### 🚀 Day 12 Challenge: Mocking Dependencies\n**Time Budget:** ~25 Minutes\n\n**1. The 5-Minute Primer**\n* Standard AI test generation fails when code interacts with external databases, APIs, or system clocks. Copilot must be explicitly guided to generate **mocks and stubs**.\n\n**2. The 15-Minute Challenge**\n* Find a function that makes an asynchronous network request, reads from a database, or relies on system time.\n* Prompt Copilot: `Write a unit test for this async method. DO NOT make real network calls. Use [insert library, e.g., jest.spyOn / unittest.mock] to mock the external API response, testing both a 200 OK success payload and a 500 Internal Server Error exception.`\n\n**3. How to Submit**\nRun your **Universal Evaluation Prompt** in Copilot Chat, copy the generated `🛡️ COPILOT AUDIT RECEIPT`, and paste it as a comment below!"
+  },
+  {
+    "day": 13,
+    "title": "Debugging AI Test Hallucinations (Flaky Tests)",
+    "body": "### 🚀 Day 13 Challenge: Fixing Flaky AI Tests\n**Time Budget:** ~25 Minutes\n\n**1. The 5-Minute Primer**\n* AI-generated tests often suffer from 'false positives' (tests that pass even when code is broken) or 'flakiness' (tests failing due to race conditions or improper async handling).\n\n**2. The 15-Minute Challenge**\n* Take a unit test generated by Copilot from earlier this week.\n* Deliberately mutate your production code (e.g., change a `<` to a `>`, or invert a boolean) to intentionally break the logic.\n* Run the test suite. If the test STILL passes, Copilot wrote a weak assertion! Use Copilot Chat to diagnose and rewrite the assertion so it strictly catches the mutation.\n\n**3. How to Submit**\nRun your **Universal Evaluation Prompt** in Copilot Chat, copy the generated `🛡️ COPILOT AUDIT RECEIPT`, and paste it as a comment below!"
+  },
+  {
+    "day": 14,
+    "title": "Legacy Code Cleanup & Readability Refactor",
+    "body": "### 🚀 Day 14 Challenge: Legacy Cleanups\n**Time Budget:** ~25 Minutes\n\n**1. The 5-Minute Primer**\n* Before refactoring legacy code, you must ensure existing functionality is preserved. Combining `/tests` with structured refactoring prompts allows you to clean up technical debt safely.\n\n**2. The 15-Minute Challenge**\n* Find a block of dense, nested, or hard-to-read legacy code in your repo (e.g., deeply nested `if/else` pyramids or callback hell).\n* Step 1: Run your existing test suite to ensure baseline coverage.\n* Step 2: Prompt Copilot: `#selection Refactor this code to eliminate nested conditionals using early returns (guard clauses) and modern syntax. Maintain 100% backward compatibility with current return types.`\n* Step 3: Run your tests to verify zero regressions!\n\n**3. How to Submit**\nRun your **Universal Evaluation Prompt** in Copilot Chat, copy the generated `🛡️ COPILOT AUDIT RECEIPT`, and paste it as a comment below!"
+  },
+  {
+    "day": 15,
+    "title": "Week 3 Show & Tell + Peer Voting",
+    "body": "### 🎉 Day 15: Week 3 Showcase & MVP Voting\n**Time Budget:** ~15 Minutes (No Coding Today!)\n\n**1. The Friday Rhythm**\n* Catch up on sprint goals and celebrate the week's best automated testing and refactoring wins.\n\n**2. The Showcase Challenge**\n* Share your most impressive **before-and-after legacy refactor** or cleanest **mocked test suite** from this week as a comment below.\n\n**3. Vote for the Weekly MVP**\n* Vote on your peers' submissions using emoji reactions:\n  * 🔥 = **Best Legacy Code Transformation**\n  * 🛡️ = **Most Robust Test Suite**\n  * 🚀 = **Cleanest Use of Mocks**\n* The winner gets the Week 3 MVP Badge!"
+  },
+  {
+    "day": 16,
+    "title": "CLI Arcade - The 1-Line Terminal Game",
+    "body": "### 🕹️ Day 16 Challenge: Terminal Micro-Game\n**Time Budget:** ~25 Minutes\n\n**1. The 5-Minute Primer**\n* Welcome to **Week 4: The CLI Arcade!** This week is all about high-energy, IDE-native fun. Building interactive terminal games pushes Copilot to generate complete user I/O logic, game loops, and ascii formatting in a single pass.\n\n**2. The 15-Minute Challenge**\n* Open Copilot Chat and prompt it to create a single-file playable game in Python, Node, or Bash under 40 lines: `Write a single-file script for a CLI 'Rock-Paper-Scissors-Lizard-Spock' game against an AI opponent with a trash-talking personality. Include ASCII formatting for the scoreboard.`\n* Save the file, run it in your built-in terminal, and try to beat the AI!\n\n**3. How to Submit**\nRun your **Universal Evaluation Prompt** in Copilot Chat, copy the generated `🛡️ COPILOT AUDIT RECEIPT`, and paste it as a comment below! (Bonus: paste a 3-line snippet of your game's trash-talk log!)."
+  },
+  {
+    "day": 17,
+    "title": "CLI Arcade - The ASCII Art Banner Generator",
+    "body": "### 🕹️ Day 17 Challenge: Retro ASCII Banners\n**Time Budget:** ~25 Minutes\n\n**1. The 5-Minute Primer**\n* Manipulating strings, multi-line arrays, and console color codes is a classic coding challenge. Today we turn Copilot into a retro 1980s terminal artist.\n\n**2. The 15-Minute Challenge**\n* Prompt Copilot to write a dynamic CLI script: `Write a script that takes a user's name as a command line argument and prints an elaborate, stylized 3D ASCII art banner of their name in the console, complete with retro animated loading dots or terminal color codes (ANSI escapes).`\n* Run the script in your IDE terminal using your team name or handle!\n\n**3. How to Submit**\nRun your **Universal Evaluation Prompt** in Copilot Chat, copy the generated `🛡️ COPILOT AUDIT RECEIPT`, and paste it as a comment below! (Include a copy-paste of your ASCII banner!)."
+  },
+  {
+    "day": 18,
+    "title": "CLI Arcade - The Tamagotchi Debugger",
+    "body": "### 🕹️ Day 18 Challenge: Save the Virtual Pet\n**Time Budget:** ~25 Minutes\n\n**1. The 5-Minute Primer**\n* Even when building fun games, AI logic can suffer from state bugs, memory leaks, or improper variable scoping.\n\n**2. The 15-Minute Challenge**\n* Prompt Copilot to generate a terminal virtual pet: `Write a 50-line CLI Tamagotchi game where a virtual pet loses hunger and happiness every 5 seconds using an async loop. Include commands to feed and pet it.`\n* Run the game. Notice how quickly state bugs occur (e.g., happiness dropping below 0 into negative numbers, or input blocking the timer loop).\n* Use Copilot inline chat (`Ctrl+I` / `Cmd+I`) to debug the loop and add a 'resurrect' cheat code!\n\n**3. How to Submit**\nRun your **Universal Evaluation Prompt** in Copilot Chat, copy the generated `🛡️ COPILOT AUDIT RECEIPT`, and paste it as a comment below!"
+  },
+  {
+    "day": 19,
+    "title": "CLI Arcade - The 15-Minute Text RPG",
+    "body": "### 🕹️ Day 19 Challenge: The Codebase RPG\n**Time Budget:** ~25 Minutes\n\n**1. The 5-Minute Primer**\n* Today is the peak challenge of Arcade Week: building a multi-room dungeon crawler where the mythology is customized entirely around our engineering team's inside jokes and repo architecture.\n\n**2. The 15-Minute Challenge**\n* Prompt Copilot: `Write a CLI dungeon crawler RPG where the player must navigate 3 rooms representing our deployment pipeline (Localhost, Staging, and Production). The enemies should be classic software bugs (e.g., 'The Merge Conflict Dragon' or 'The Null Pointer Goblin'). Include a turn-based battle system using dice rolls.`\n* Run the game and fight your way to Production!\n\n**3. How to Submit**\nRun your **Universal Evaluation Prompt** in Copilot Chat, copy the generated `🛡️ COPILOT AUDIT RECEIPT`, and paste it as a comment below!"
+  },
+  {
+    "day": 20,
+    "title": "CLI Arcade Showdown & Weekly MVP Awards",
+    "body": "### 🏆 Day 20: The CLI Arcade Showdown!\n**Time Budget:** ~15 Minutes (No Coding Today!)\n\n**1. The Friday Rhythm**\n* Congratulations on completing Month 1 of the AI Upskilling Marathon! Today is our Arcade Showdown.\n\n**2. The Showcase Challenge**\n* Drop the code snippet or command-line execution string for your favorite creation from this week (the RPG, the Tamagotchi, or the ASCII banner) into the comments below so teammates can run it locally in their terminals!\n\n**3. Vote for the Weekly MVP**\n* Vote on your peers' arcade games using emoji reactions:\n  * 🕹️ = **Most Addicting Gameplay**\n  * 😂 = **Funniest Terminal Trash-Talk**\n  * 🎨 = **Best Retro ASCII Aesthetics**\n* The winner takes home the Week 4 Arcade Champion Badge!"
+  }
+]
